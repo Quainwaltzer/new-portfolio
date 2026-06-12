@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Horizon';
+    src: url('/src/lib/assets/fonts/horizon.otf');
+}
+
+@font-face {
+    font-family: 'Horizon Outlined';
+    src: url(/src/lib/assets/fonts/horizon_outlined.otf);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+    background-color: #ffbc95; /* The highlight background (Orange) */
+    color: #4a4a4a;            /* The highlighted text color (Gray) */
+}
+
+::-webkit-selection {
+    background-color: #ffbc95;
+    color: #4a4a4a;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+#smooth-wrapper {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#smooth-content {
+    width: 100%;
+    overflow: visible; /* Allows animations to pop outside section boxes safely */
+}
+
+.no-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
