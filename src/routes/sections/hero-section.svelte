@@ -3,11 +3,7 @@
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
-    
-   
-
-
-
+    import heroImage from '$lib/assets/hero-image.jpeg';
     onMount(() => {
          gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
             const names = document.querySelectorAll('.name-signature h1');
@@ -62,7 +58,7 @@
     </div>
 
     <div class="hero-image-wrapper">
-        <img src="../src/lib/assets/hero-image.jpeg" alt="">
+        <img src={heroImage} alt="">
         <div class="lens-blur-overlay"></div>
     </div>
     
