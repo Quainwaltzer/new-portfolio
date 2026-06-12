@@ -19,7 +19,7 @@
     import Dither from '$lib/components/Dither.svelte';
     import GridScan from '$lib/components/GridScan.svelte';
     import LightPillar from '$lib/components/LightPillar.svelte';
-    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText, MotionPathPlugin);
+   
 
     function removeGlobalShadowViewport(){
         gsap.to('.global-shadow-viewport', {
@@ -225,6 +225,7 @@
     }
 
     onMount(() => {
+         gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText, MotionPathPlugin);
         removeGlobalShadowViewport();
         setupSvg();
 

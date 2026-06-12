@@ -4,11 +4,12 @@
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
     
-    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+   
 
 
 
     onMount(() => {
+         gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
             const names = document.querySelectorAll('.name-signature h1');
     const namesArray = Array.from(names);
         gsap.set('.pathing', {drawSVG: '0%'});

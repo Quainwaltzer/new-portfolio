@@ -5,13 +5,13 @@
 	import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-    gsap.registerPlugin(ScrollTrigger);
+
 
 	let { children } = $props();
 	let globalShadowViewport;
 
 	onMount((() => {
-		
+		    gsap.registerPlugin(ScrollTrigger);
 		gsap.to('.orange-cover', {
 			y: '-100%',
 			duration: 1.5,

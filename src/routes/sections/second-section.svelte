@@ -6,9 +6,10 @@
     let sectionTagline;
     let overallWrapper;
     let floatingLinesContainer;
-    gsap.registerPlugin(ScrollTrigger);
+
 
     onMount (() =>{
+            gsap.registerPlugin(ScrollTrigger);
         changeTextColor();
 
         scrollingThird();

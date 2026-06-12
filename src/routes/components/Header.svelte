@@ -6,7 +6,7 @@
     import { gsap } from 'gsap';
     import { SplitText } from 'gsap/SplitText';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    gsap.registerPlugin(SplitText, ScrollTrigger);
+    
 
     function animateHover(e) {
         const localSplit = new SplitText(e.currentTarget, { type: 'chars' });
@@ -64,6 +64,7 @@
     }        
     
     onMount(() => {
+        gsap.registerPlugin(SplitText, ScrollTrigger);
         scrollingAnimation();
         disappearHeader();
     });
