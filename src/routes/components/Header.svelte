@@ -9,7 +9,8 @@
     
 
     function animateHover(e) {
-        const localSplit = new SplitText(e.currentTarget, { type: 'chars' });
+        if (gsap.isTweening(e.currentTarget)) return;
+        const localSplit = new SplitText(e.currentTarget, { type: 'chars', charsClass: 'gsap-split-text-chars' });
 
        const tl = gsap.timeline({
             onComplete: () => localSplit.revert()
@@ -20,14 +21,16 @@
             opacity: 0,
             duration: 0.4,
             ease: 'power2.out',
-            stagger: 0.08
+            stagger: 0.08,
+            overwrite: 'auto'
         })
         .to(localSplit.chars, {
             y: '0%',
             opacity: 1,
             duration: 0.4,
             ease: 'power2.in',
-            stagger: 0.08
+            stagger: 0.08,
+            overwrite: 'auto'
         }, 0.15);
 
         gsap.to(e.currentTarget, {
@@ -41,7 +44,7 @@
 
         const icon = e.currentTarget.querySelector('svg path');
         if (icon) {
-            gsap.to(icon, { fill: '#1a1a1a', color: '#1a1a1a', duration: 0.3 });
+            gsap.to(icon, { fill: '#1a1a1a', color: '#1a1a1a', duration: 0.3, overwrite: 'auto'});
         }
 
     }
@@ -49,15 +52,16 @@
     function animateHoverOut(e) {
         gsap.to(e.currentTarget, {
             scale: 1,
-            backgroundColor: 'rgba(0, 0, 0, 0.152)',
+            backgroundColor: 'rgba(96, 96, 96, 0.15)',
             color: '#ffbc95',
             duration: 0.3,
-            ease: 'power2.out'
+            ease: 'power2.out',
+            overwrite: 'auto'
         });
 
         const icon = e.currentTarget.querySelector('svg path');
         if (icon) {
-            gsap.to(icon, { fill: '#ffbc95', color: '#ffbc95', duration: 0.3 });
+            gsap.to(icon, { fill: '#ffbc95', color: '#ffbc95', duration: 0.3, overwrite: 'auto'});
         }
 
 

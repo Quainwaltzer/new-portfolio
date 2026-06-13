@@ -15,14 +15,7 @@
 		gsap.to('.orange-cover', {
 			y: '-100%',
 			duration: 1.5,
-			ease: 'power2.inOut',
-			onStart: () => {
-				document.body.classList.add('no-scroll');
-			},
-			
-			onComplete: () => {
-				document.body.classList.remove('no-scroll');
-			}
+			ease: 'power2.inOut'
 		});
 
 		scrollingAnimation();
