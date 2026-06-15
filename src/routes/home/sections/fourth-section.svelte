@@ -79,7 +79,7 @@
         ScrollTrigger.create({
             trigger: '.fourth-section-wrapper',
             start: 'top top',
-            end: '+=600%',
+            end: '+=500%',
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
@@ -89,7 +89,7 @@
 
     function createTimeline() {
         gsap.set('.dither-background', {display: 'none', opacity: 0});
-        gsap.set('.vignette-overlay', {display: 'none', opacity: 0});
+       
         return gsap.timeline({
             scrollTrigger: {
                 trigger: '.fourth-section-wrapper',
@@ -167,6 +167,12 @@
             type: 'chars'
         });
 
+        
+        gsap.set(splitQuestion.chars, {
+            filter: 'blur(10px)',
+            opacity: 0});
+
+            
         tl.from('.question', {
             scale: 0,
             duration: tl.duration() + 6,
@@ -198,7 +204,14 @@
             opacity: 0,
             duration: 2,
         })
+        
         .to('.dither-background', {display: 'block', opacity: 1, duration: 6, ease: 'power2.inOut'})
+        .to('.vignette-overlay', {
+            opacity: 1,
+            duration: 1,
+            display: 'block'
+           
+        }, '<')
         .fromTo(images, {
             x: () => window.innerWidth,
             y: () => window.innerHeight,
@@ -207,9 +220,9 @@
             x: () => -window.innerWidth,
             y: () => -window.innerHeight,
             rotate: '-10deg',
-            duration: 12,
+            duration: 18,
             ease: 'power2.inOut',
-            stagger: { amount: 5 }
+            stagger: { amount: 9 }
         }, '-=6');
     }
 
@@ -257,22 +270,6 @@
        })
     }
 
-    function setupOverlay(){
-        gsap.to('.vignette-overlay', {
-            opacity: 1,
-            duration: 1,
-            display: 'block',
-            scrollTrigger: {
-                trigger: '.question-wrapper',
-                start: 'top bottom',
-                end: 'top+=20 bottom-=10',
-                toggleActions: 'play none none reverse',
-                markers: false
-            }
-           
-        })
-    }
-
     function fadeOut(targetPath){
 
         gsap.to('#smooth-wrapper', {opacity: 0, filter: 'blur(10px)', duration: 1,
@@ -280,6 +277,7 @@
     }
 
     onMount(() => {
+         gsap.set('.vignette-overlay', { display: 'none', opacity: 0 });
          gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, SplitText, MotionPathPlugin);
         removeGlobalShadowViewport();
         setupSvg();
@@ -291,7 +289,6 @@
         addImageAnimation(tl);
         setupImageHover();
         setupGlowingDot();
-        setupOverlay();
 
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill());
@@ -396,6 +393,7 @@
         z-index: 999999;
         pointer-events: none;
         box-shadow: inset 0 0 100px 50px black;
+        opacity: 0;
     }
 
     .dither-background :global(canvas){
@@ -410,12 +408,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
         box-sizing: border-box;
     }
 
     .centered-vector-graphic{
         position: absolute;
+        z-index:  99999999;
     }
     .traceable-path {
         filter: url(#neon-glow);

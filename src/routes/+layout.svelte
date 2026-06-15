@@ -13,6 +13,7 @@
 	onMount((() => {
 		    gsap.registerPlugin(ScrollTrigger);
 		gsap.to('.orange-cover', {
+            delay: 0.5,
 			y: '-100%',
 			duration: 1.5,
 			ease: 'power2.inOut'

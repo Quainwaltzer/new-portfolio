@@ -3,40 +3,32 @@
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { SplitText } from 'gsap/SplitText';
     let sectionTagline;
     let overallWrapper;
     let floatingLinesContainer;
 
 
     onMount (() =>{
-            gsap.registerPlugin(ScrollTrigger);
+            gsap.registerPlugin(ScrollTrigger, SplitText);
         changeTextColor();
-
-        scrollingThird();
         
     });
 
     function changeTextColor(){
-        gsap.from(sectionTagline,{
-            opacity: 0,
-            scrollTrigger:{
-                trigger: overallWrapper,
-                start: 'top center',
-                end: 'center center+=10',
-                scrub: 1,
-                markers: false,
-            }
-        });
+        const splitted = SplitText.create('.section-tagline', { type: 'words', mask: 'words'});
+        const convertedWords = splitted.words;
 
-         gsap.from(sectionTagline,{
-            color: '#2d0000',
-            delay: 3,
+         gsap.from(convertedWords,{
+            y: 800,
+            duration: 1,
+            stagger: 0.2,
             scrollTrigger:{
                 trigger: overallWrapper,
-                start: 'top center',
-                end: 'center center+=10',
-                scrub: 3,
+                start: '+=0% bottom-=100',
+                end: '+=5% bottom-=100',
                 markers: false,
+                toggleActions: 'play none none reverse'
             }
         });
     }

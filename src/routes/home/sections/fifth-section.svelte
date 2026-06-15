@@ -7,11 +7,11 @@
 
     function scrollFaster(){
         gsap.to('.fifth-section-wrapper', {
-            y: '-100vh',
+            y: '-125vh',
             scrollTrigger: {
-                trigger: '.fifth-section-wrapper',
-                start: 'top-=70% bottom+=200',
-                end: 'bottom+=200 bottom+=200',
+                trigger: '.sixth-section-wrapper',
+                start: 'top bottom',
+                end: 'bottom bottom',
                 scrub: 4,
                 markers: false
             }
@@ -252,6 +252,7 @@
         
         /* 🟢 Smooth transition applied to the scale transformation matrix layer */
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        cursor: pointer;
     }
 
     .overlay-wrapper button:active{

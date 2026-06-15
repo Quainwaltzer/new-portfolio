@@ -91,9 +91,9 @@
     function disappearHeader(){
         gsap.to('.main-header', {
             scrollTrigger: {
-                trigger: '.stack-section-three',
+                trigger: '.third-section-new',
                 start: 'top top',
-                end: 'bottom top',
+                end: '+=1000%',
                 scrub: true,
                 markers: false,
                 

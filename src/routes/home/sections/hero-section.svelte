@@ -6,8 +6,8 @@
     import heroImage from '$lib/assets/hero-image.jpeg';
     onMount(() => {
          gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
-            const names = document.querySelectorAll('.name-signature h1');
-    const namesArray = Array.from(names);
+        const names = document.querySelectorAll('.name-signature h1');
+        const namesArray = Array.from(names);
         gsap.set('.pathing', {drawSVG: '0%'});
 
         gsap.fromTo('.hero-image-wrapper img', {
@@ -31,7 +31,8 @@
                 
                 onComplete: () => {
                     document.body.classList.remove('no-scroll');
-                }});
+                }
+        });
     });
 </script>
 

@@ -28,6 +28,10 @@
     width: 0;
 }
 
+body, html {
+    background-color: #111111; /* Or match your exact dark color */
+}
+
 #smooth-wrapper {
     overflow: hidden;
     position: fixed;
