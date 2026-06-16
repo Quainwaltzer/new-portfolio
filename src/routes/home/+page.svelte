@@ -15,6 +15,7 @@
 
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
     onMount(() => {
+        let mm = gsap.matchMedia();
         ScrollSmoother.create({
             wrapper: '#smooth-wrapper',
             content: '#smooth-content',
@@ -22,6 +23,9 @@
             effects: true,         
             normalizeScroll: true  
         });
+
+
+
     })
 </script>
 
@@ -76,6 +80,7 @@
     pointer-events: none;
     padding: 10px;
     border-radius: 50px;
+    opacity: 0;
 }
 
 .easter-egg{

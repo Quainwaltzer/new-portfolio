@@ -11,13 +11,24 @@
 	let globalShadowViewport;
 
 	onMount((() => {
-		    gsap.registerPlugin(ScrollTrigger);
-		gsap.to('.orange-cover', {
+		history.scrollRestoration = 'manual';
+
+		// Force top before anything else runs
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
+		window.scrollTo(0, 0);
+
+        ScrollTrigger.clearScrollMemory();
+        ScrollTrigger.refresh();
+        
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.to('.orange-cover', {
             delay: 0.5,
-			y: '-100%',
-			duration: 1.5,
-			ease: 'power2.inOut'
-		});
+            y: '-100%',
+            duration: 1.5,
+            ease: 'power2.inOut'
+        });
 
 		scrollingAnimation();
 	}));

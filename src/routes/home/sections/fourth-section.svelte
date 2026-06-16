@@ -477,7 +477,6 @@
         z-index: 2;
         border-radius: 20px;
         transform-style: preserve-3d;
-        transform: scaleZ(2);
         transform-origin: top center;
     }
 
