@@ -6,6 +6,9 @@
     onMount(()=>{
         gsap.set('.bg-upper', { clipPath: 'inset(0 0 0% 0)' });
         gsap.set('.bg-lower', { clipPath: 'inset(0% 0 0 0)' });
+
+        let mm = gsap.matchMedia();
+
         ScrollTrigger.create({
             trigger: '.intro-third-wrapper',
             start: 'top top',
@@ -23,6 +26,7 @@
                 scrub: 1,
             }
         });
+        
 
         tl.from('.upper-tagline', { x: '-200%' })
           .from('.lower-tagline', { x: '200%'}, '<')
@@ -97,6 +101,49 @@
         transform: translate(40%, 5%);
 
     }
+
+    @media (min-width: 1250px){
+        .upper-tagline{
+            transform: translate(-40%,-5%);
+        }
+
+        .lower-tagline{
+            transform: translate(40%, 5%);
+
+        }
+    }
+
+
+    @media (min-width: 1024px){
+        .upper-tagline{
+            transform: translate(-10%,-5%);
+        }
+
+        .lower-tagline{
+            transform: translate(10%, 5%);
+
+        }
+    }
+
+
+ @media (max-width: 834px){
+        .upper-tagline{
+            transform: translate(0%,-5%);
+        }
+
+        .lower-tagline{
+            transform: translate(0%, 5%);
+
+        }
+    }
+
+    @media (max-width: 720px){
+        .upper-tagline h1, .lower-tagline h1{
+            font-size: clamp(1.5rem, 8vw, 3rem);
+            white-space: nowrap;
+        }
+    }
+
 
     .white-bg{
         background: #ffbc95;

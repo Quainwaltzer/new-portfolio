@@ -153,7 +153,7 @@
          backdrop-filter: blur(8px);
           mask-image: linear-gradient(to bottom, black 10%, transparent 100%);
         -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
-        height: 10  vh;
+        height: 10vh;
         width: 100%;
         position: fixed;
         top: 0;
@@ -161,17 +161,68 @@
         z-index: 1;
     }
 
-   .main-header{
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 4vw;
-    z-index: 2;
-    border: none;
-   }
+    .main-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100dvh;
+        padding: 4vw;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 10% 80% 10%;
+
+        z-index: 2;
+        border: none;
+    }
+
+/* Desktop behavior (implicit grid areas via columns) */
+.logo {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+}
+
+.nav-links {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: center;
+
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+.socials {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .nav-links{
+          grid-column: 2;
+        grid-row: 3;
+    }
+
+    .main-header .logo{
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+
+    .socials{
+        display: none;
+    }
+}
 
    .main-header .logo h6, .main-header .nav-links a, .main-header .socials a {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -180,12 +231,12 @@
    }
 
    .main-header .logo h6 {
-    font-size: 1rem;
+        font-size: clamp(0.85rem, 0.8rem + 0.3vw, 1.1rem);
    }
 
    .main-header .nav-links a, .main-header .socials a {
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: clamp(0.2rem, 0.65rem, 0.9rem);
     font-weight: 700;
    }
 
@@ -203,10 +254,13 @@
     border-radius: 50px;
    }
 
+
+
    a:focus,
 a:focus-visible,
 a:active {
   outline: none;
   box-shadow: none;
 }
+
 </style>

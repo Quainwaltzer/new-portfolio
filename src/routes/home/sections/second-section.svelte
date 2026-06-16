@@ -120,7 +120,7 @@
 
     .section-tagline{
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 5vw;
+        font-size: clamp(2rem, 5vw, 9vw);
         color: #ffbc95;
         text-align: left;
         z-index: 10000;

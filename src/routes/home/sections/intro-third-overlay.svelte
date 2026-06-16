@@ -280,13 +280,44 @@ background: radial-gradient(
         position: absolute;
         font-family: 'Plus Jakarta Sans';
         color: ivory;
-        font-size: 2rem;
+        font-size: 0.8rem;
         text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     
+    @media (max-width: 575px){
+        .mask{
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (min-width: 576px) and (max-width: 767px){
+        .mask{
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px){
+        .mask{
+            font-size: 1.3rem;
+        }
+    }
+
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) and (max-width: 1199px){
+        .mask{
+            font-size: 1.5rem;
+        }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {
+        .mask{
+            font-size: 2rem;
+        }
+    }
 
     .scan-line {
         position: absolute;

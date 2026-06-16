@@ -4,35 +4,65 @@
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
     import DrawSVGPlugin from 'gsap/DrawSVGPlugin';
     import heroImage from '$lib/assets/hero-image.jpeg';
+
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+
     onMount(() => {
-         gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+        let mm = gsap.matchMedia();
         const names = document.querySelectorAll('.name-signature h1');
         const namesArray = Array.from(names);
-        gsap.set('.pathing', {drawSVG: '0%'});
 
-        gsap.fromTo('.hero-image-wrapper img', {
-            scale: 1.2,
-            opacity: 0.5,
-            y: '30%',
-        }, {
-            scale: 1,
-            opacity: 1,
-            duration: 1.5,
-            ease: 'power2.inOut',
-            y: '0%',
-        });
+        mm.add("(min-width: 1024px)", () => {
+            gsap.set('.pathing', {drawSVG: '0%'});
 
-        gsap.from(namesArray, {y: 50, opacity: 0, delay:0.5,  duration: 1, stagger: 0.75});
+            gsap.fromTo('.hero-image-wrapper img', {
+                scale: 1.2,
+                opacity: 0.5,
+                y: '30%',
+            }, {
+                scale: 1,
+                opacity: 1,
+                duration: 1.5,
+                ease: 'power2.inOut',
+                y: '0%',
+            });
 
-        gsap.to('.pathing', {drawSVG: '100%', delay: 0.5, duration: 3, ease: 'power2.inOut', 
+            gsap.from(namesArray, {y: 50, opacity: 0, delay: 0.5, duration: 1, stagger: 0.75});
+
+            gsap.to('.pathing', {
+                drawSVG: '100%', 
+                delay: 0.5, 
+                duration: 3, 
+                ease: 'power2.inOut', 
                 onStart: () => {
                     document.body.classList.add('no-scroll');
                 },
-                
                 onComplete: () => {
                     document.body.classList.remove('no-scroll');
                 }
+            });
         });
+
+        mm.add("(max-width: 1023px)", () => {
+            gsap.set('.pathing', { drawSVG: '100%' });
+            
+            gsap.set('.hero-image-wrapper img', {
+                scale: 1,
+                opacity: 1,
+                y: '0%'
+            });
+
+            gsap.set(namesArray, {
+                y: 0,
+                opacity: 1
+            });
+            
+            document.body.classList.remove('no-scroll');
+        });
+
+        return () => {
+            mm.revert();
+        };
     });
 </script>
 
@@ -43,9 +73,7 @@
             <h4>Full Stack Dev <br> & UI/UX Designer</h4> 
         </div>
 
-        <div class="placeholder-whitespace">
-
-        </div>
+        <div class="placeholder-whitespace"></div>
 
         <div class="hero-name-wrapper">
             <div class="name-signature">
@@ -66,12 +94,13 @@
     </div>
 
     <div class="hero-image-wrapper">
-        <img src={heroImage} alt="">
+        <img src={heroImage} alt="Rovie Endigado">
         <div class="lens-blur-overlay"></div>
     </div>
     
     <div class="divider"></div>
 </div>
+
 <style>
     .divider{
         position: absolute;
@@ -80,27 +109,26 @@
         width: 100%;
         height: 30vh;
         background: linear-gradient(to bottom, transparent 0%, #251716 100%);
-        z-index: 99999;
+        z-index: 10;
     }
     .overall-wrapper {
         width: 100%;
         height: 100dvh;
         position: relative;
-
+        overflow: hidden;
     }
-
 
     .text-wrapper{
         position: absolute;
+        inset: 0;
         display: flex;
         flex-flow: column;
-        height: 100%;
-        width: 100%;
         justify-content: space-between;
         align-items: stretch;
         font-family: 'Plus Jakarta Sans', sans-serif;
         padding: 4vw;
         color: #ffbc95;
+        z-index: 5;
     }
 
     .hero-text-wrapper {
@@ -110,7 +138,7 @@
         height: 100%;
         width: 100%;
         align-items: flex-end;
-        font-size: 2vw;
+        font-size: clamp(1rem, 2vw, 2rem);
     }
 
     .placeholder-whitespace {
@@ -118,39 +146,45 @@
     }
 
     .hero-name-wrapper {
-        justify-self: flex-end;
+        justify-self: flex-start;
         text-align: center;
         flex: 1;
         display: flex;
         height: 100%;
         width: 100%;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: flex-end;
         flex-flow: column;
     }
 
     .name-signature{
         display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
     }
 
     svg{
         will-change: transform;
+        width: 12vw;
+        height: auto;
     }
 
     .hero-name-wrapper .name-signature h1 {
-        font-size: 7rem;
+        font-size: clamp(2.5rem, 8vw, 7rem);
+            white-space: nowrap;
     }
 
     .hero-name-wrapper h4 {
-        font-size: 1.5vw;
+  font-size: clamp(0.9rem, 1.5vw, 1.6rem);
+
     }
 
     .hero-image-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
+        position: absolute;
+        inset: 0;
         overflow: hidden;
-        z-index: -1;
+        z-index: 1;
     }
 
     .hero-image-wrapper::after {
@@ -166,18 +200,20 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        
     }
 
     .lens-blur-overlay {
         position: absolute;
         inset: 0;
         pointer-events: none;
-        /* Blurs the image details sitting underneath it */
         backdrop-filter: blur(5px); 
-        
-        /* Slices a hole in the middle so the underlying clean image shows through crisp */
         mask-image: radial-gradient(circle at 50% 50%, transparent 30%, black 80%);
         -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 30%, black 80%);
+    }
+
+    @media (min-width: 767px) {
+        .hero-name-wrapper{
+            justify-content: flex-end;
+        }
     }
 </style>

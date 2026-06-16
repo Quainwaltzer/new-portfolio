@@ -6,6 +6,7 @@
     import { SplitText } from 'gsap/SplitText';
         import Sphere from '$lib/assets/beautiful_sphere.glb?url';
     onMount(()=>{
+        let mm = gsap.matchMedia();
 
         gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger, SplitText);
         const orange = document.querySelectorAll('#Active_Group circle');
@@ -44,42 +45,51 @@
             }
         });
 
-       
+    
 
-    // Stage 1: Initial Reveal
-    tl.to('.node-1 .node-title', { opacity: 1 }, 0)
-    .fromTo('.node-1 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 }, 0)
-    .to(["#Ring_1", "#Glow_1"], { drawSVG: "0% 20%" }, 0)
-    .to(ellipses[0], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
-    .to('.node-2 .node-title', { opacity: 1 })
-    .fromTo('.node-2 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
+        // Stage 1: Initial Reveal
+        tl.to('.node-1 .node-title', { opacity: 1 }, 0)
+        .fromTo('.node-1 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 }, 0)
+        .to(["#Ring_1", "#Glow_1"], { drawSVG: "0% 20%" }, 0)
+        .to(ellipses[0], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
+        .to('.node-2 .node-title', { opacity: 1 })
+        .fromTo('.node-2 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
 
-    // Segment 2: Transition to Node 2 & 3
-    .to(["#Ring_2", "#Glow_2"], { drawSVG: "20% 40%" })
-    .to(ellipses[1], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
-    .to('.node-3 .node-title', { opacity: 1 })
-    .fromTo('.node-3 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
+        // Segment 2: Transition to Node 2 & 3
+        .to(["#Ring_2", "#Glow_2"], { drawSVG: "20% 40%" })
+        .to(ellipses[1], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
+        .to('.node-3 .node-title', { opacity: 1 })
+        .fromTo('.node-3 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
 
-    // Segment 3: Transition to Node 3 & 4
-    .to(["#Ring_3", "#Glow_3"], { drawSVG: "40% 60%" })
-    // 🚀 Keep the breath moving slowly across the entire layout span
-    .to(ellipses[2], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
-    .to('.node-4 .node-title', { opacity: 1 })
-    .fromTo('.node-4 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
+        // Segment 3: Transition to Node 3 & 4
+        .to(["#Ring_3", "#Glow_3"], { drawSVG: "40% 60%" })
+        // 🚀 Keep the breath moving slowly across the entire layout span
+        .to(ellipses[2], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
+        .to('.node-4 .node-title', { opacity: 1 })
+        .fromTo('.node-4 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
 
-    // Segment 4: Transition to Node 4 & 5
-    .to(["#Ring_4", "#Glow_4"], { drawSVG: "60% 80%" })
-    .to(ellipses[3], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
-    .to('.node-5 .node-title', { opacity: 1 })
-    .fromTo('.node-5 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
+        // Segment 4: Transition to Node 4 & 5
+        .to(["#Ring_4", "#Glow_4"], { drawSVG: "60% 80%" })
+        .to(ellipses[3], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' })
+        .to('.node-5 .node-title', { opacity: 1 })
+        .fromTo('.node-5 .split-word', { y: 100 }, { y: 0, opacity: 1, stagger: 0.02 })
 
-    // Segment 5: Final Arcs
-    .to(["#Ring_5", "#Glow_5"], { drawSVG: "80% 100%" })
-    .to(ellipses[4], { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' });
+        // Segment 5: Final Arcs
+        .to(["#Ring_5", "#Glow_5"], { drawSVG: "80% 100%" });
 
-    gsap.fromTo('.model-wrapper', { scale: 1.0 }, { scale: 1.5, ease: 'power1.inOut', duration: 3, repeat: -1, yoyo: true, }, '<');
+        mm.add("(min-width: 1024px)", () => {
+                gsap.fromTo('.model-wrapper', { scale: 1.0 }, { scale: 1.5, ease: 'power1.inOut', duration: 3, repeat: -1, yoyo: true });
+        });
 
-    })
+        mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+            gsap.fromTo('.model-wrapper', { scale: 0.9 }, { scale: 1.2, ease: 'power1.inOut', duration: 3, repeat: -1, yoyo: true });
+        });
+
+        mm.add("(min-width: 576px) and (max-width: 767px)", () => {
+            gsap.fromTo('.model-wrapper', { scale: 0.7 }, { scale: 0.9, ease: 'power1.inOut', duration: 3, repeat: -1, yoyo: true });
+        });
+
+    });
 
 
 </script>
